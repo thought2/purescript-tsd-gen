@@ -24,14 +24,12 @@
                 shell.buildInputs = with pkgs; [
                   nixpkgs-fmt
                 ];
-                shell.crossPlatform = p: [ p.ghcjs ];
+                # shell.crossPlatform = p: [ ];
               };
           })
         ];
         pkgs = import nixpkgs { inherit system overlays; inherit (haskellNix) config; };
-        flake = pkgs.helloProject.flake {
-          crossPlatforms = p: [ p.ghcjs ];
-        };
+        flake = pkgs.helloProject.flake { };
       in
       flake // {
         defaultPackage = flake.packages."purescript-tsd-gen:exe:purs-tsd-gen";
